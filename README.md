@@ -1,6 +1,6 @@
-# 🍕 Pizzaria ZéRicci - Sistema de Gestão de Motoboys 🛵
+# 🍕 Pizzaria ZéRissi - Sistema de Gestão de Motoboys 🛵
 
-Bem-vindo ao ZéRicci! Este é um projeto desenvolvido como parte do curso da UNIVESP para atender à demanda de uma pizzaria em Descalvado que precisa de um sistema para gerenciar seus motoboys.
+Bem-vindo ao ZéRissi! Este é um projeto desenvolvido como parte do curso da UNIVESP para atender à demanda de uma pizzaria em Descalvado que precisa de um sistema para gerenciar seus motoboys.
 
 ## 🚀 Introdução
 
