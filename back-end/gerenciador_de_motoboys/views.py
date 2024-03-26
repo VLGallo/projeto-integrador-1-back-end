@@ -1,7 +1,6 @@
 from rest_framework.exceptions import NotFound
-
-from gerenciador_de_motoboys.models import Motoboy
-from gerenciador_de_motoboys.serializers import MotoboySerializer
+from .models import Motoboy
+from .serializers import MotoboySerializer
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
