@@ -7,5 +7,4 @@ urlpatterns = [
     path('funcionario/<int:pk>', FuncionarioDetailView.as_view()),
     path('funcionario/update/<int:pk>', FuncionarioUpdateView.as_view()),
     path('funcionario/delete/<int:pk>', FuncionarioDeleteView.as_view()),
-    /
 ]
