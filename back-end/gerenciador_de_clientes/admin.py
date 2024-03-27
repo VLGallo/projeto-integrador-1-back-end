@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import GerenciadorDeClientes
+from .models import Cliente
 
-admin.site.register(GerenciadorDeClientes)
+admin.site.register(Cliente)
