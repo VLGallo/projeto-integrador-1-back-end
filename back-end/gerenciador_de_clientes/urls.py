@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import GerenciadorDeClientesListView, GerenciadorDeClientesDetailView, GerenciadorDeClientesCreateView, GerenciadorDeClientesUpdateView, GerenciadorDeClientesDeleteView
+from .views import ClienteListView, ClienteDetailView, ClienteView, ClienteUpdateView, ClienteDeleteView
 
 urlpatterns = [
-    path('cliente/', GerenciadorDeClientesListView.as_view()),
-    path('cliente/add/', GerenciadorDeClientesCreateView.as_view()),
-    path('cliente/<int:pk>/', GerenciadorDeClientesDetailView.as_view()),
-    path('cliente/update/<int:pk>/', GerenciadorDeClientesUpdateView.as_view()),
-    path('cliente/delete/<int:pk>/', GerenciadorDeClientesDeleteView.as_view()),
+    path('cliente/', ClienteListView.as_view()),
+    path('cliente/add', ClienteView.as_view()),
+    path('cliente/<int:pk>', ClienteDetailView.as_view()),
+    path('cliente/update/<int:pk>', ClienteUpdateView.as_view()),
+    path('cliente/delete/<int:pk>', ClienteDeleteView.as_view()),
 ]

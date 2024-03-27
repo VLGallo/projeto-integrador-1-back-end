@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import GerenciadorDeClientes
+from .models import Cliente
 
-class GerenciadorDeClientesSerializer(serializers.ModelSerializer):
+class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
-        model = GerenciadorDeClientes
+        model = Cliente
         fields = ['id', 'nome', 'telefone', 'endereco', 'email']
