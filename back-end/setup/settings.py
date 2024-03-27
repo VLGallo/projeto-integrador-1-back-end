@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "gerenciador_de_motoboys.apps.GerenciadorDeMotoboysConfig",
     "gerenciador_de_funcionarios.apps.GerenciadorDeFuncionariosConfig",
+    "gerenciador_de_clientes.apps.GerenciadorDeClientesConfig"
 ]
 
 MIDDLEWARE = [
