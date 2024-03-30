@@ -1,6 +1,6 @@
 from rest_framework.exceptions import NotFound
 from .models import Motoboy
-from .serializers import MotoboySerializer
+from .serializers import MotoboySerializerResponse, MotoboySerializerRequest
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -8,18 +8,18 @@ from rest_framework.views import APIView
 
 class MotoboyView(APIView):
     def post(self, request):
-        serializer = MotoboySerializer(data=request.data)
+        serializer = MotoboySerializerRequest(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
-        response_data = MotoboySerializer(user).data
+        response_data = MotoboySerializerResponse(user).data
 
         return Response(data=response_data, status=status.HTTP_201_CREATED)
 
 class MotoboyListView(APIView):
     def get(self, request):
         companies = Motoboy.objects.all()
-        serializer = MotoboySerializer(companies, many=True)
+        serializer = MotoboySerializerResponse(companies, many=True)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -33,7 +33,7 @@ class MotoboyDetailView(APIView):
 
     def get(self, request, pk):
         motoboy = self.get_object(pk)
-        serializer = MotoboySerializer(motoboy)
+        serializer = MotoboySerializerResponse(motoboy)
         return Response(serializer.data)
 
 class MotoboyUpdateView(APIView):
@@ -45,7 +45,7 @@ class MotoboyUpdateView(APIView):
 
     def put(self, request, pk):
         motoboy = self.get_object(pk)
-        serializer = MotoboySerializer(motoboy, data=request.data)
+        serializer = MotoboySerializerRequest(motoboy, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)

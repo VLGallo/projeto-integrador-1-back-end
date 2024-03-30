@@ -1,9 +1,14 @@
 from django.db import models
+from gerenciador_de_produtos.models import Produto
+
 
 class Pedido(models.Model):
     data_hora = models.DateTimeField()
-    produtos = models.JSONField()
-    total = models.DecimalField(max_digits=10, decimal_places=2)
+    produtos = models.ManyToManyField(Produto)
+
 
     def __str__(self):
-        return f"Pedido em {self.data_hora} - Total: R${self.total}"
+        return f"Pedido em {self.data_hora}"
+
+
+

@@ -5,18 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8a46607-84d6-4ba1-86b6-a82d3513640c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/gerenciador_de_pedidos/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gerenciador_de_pedidos/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gerenciador_de_produtos/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gerenciador_de_produtos/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DiagramaER.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/../DiagramaER.drawio" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Projeto Integrador 01.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gerenciador_de_motoboys/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_motoboys/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gerenciador_de_motoboys/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_motoboys/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gerenciador_de_motoboys/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_motoboys/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gerenciador_de_motoboys/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_motoboys/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gerenciador_de_pedidos/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_pedidos/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gerenciador_de_pedidos/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_pedidos/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gerenciador_de_pedidos/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_pedidos/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/setup/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,13 +44,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.manage.executor": "Run",
+    "Python.models.executor": "Run",
+    "Python.urls.executor": "Debug",
+    "Python.views.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -69,5 +72,23 @@
       <updated>1711418583971</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/gerenciador_de_pedidos/views.py</url>
+          <line>13</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
