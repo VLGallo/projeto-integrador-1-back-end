@@ -14,7 +14,7 @@ class MotoboySerializerRequest(serializers.ModelSerializer):
 
     def create(self, validated_data):
         funcionario = validated_data.pop('funcionario')
-        funcionario = Funcionario.objects.get(pk=funcionario)  # Busca o usuário pelo ID
+        funcionario = Funcionario.objects.get(pk=funcionario)
         validated_data['funcionario'] = funcionario
         return super().create(validated_data)
 
@@ -26,16 +26,11 @@ class MotoboySerializerRequest(serializers.ModelSerializer):
 
 
 class MotoboySerializerResponse(serializers.ModelSerializer):
-    funcionarios = serializers.SerializerMethodField()
+    funcionario = FuncionarioSerializer()
 
     class Meta:
         model = Motoboy
-        fields = ['id', 'nome', 'telefone', 'placa', 'funcionarios']
+        fields = ['id', 'nome', 'telefone', 'placa', 'funcionario']
 
-
-    def get_funcionario(self, obj):
-        funcionarios_queryset = obj.funcionarios.all()
-        funcionarios_serializer = FuncionarioSerializer(funcionarios_queryset, many=True)
-        return funcionarios_serializer.data
 
 

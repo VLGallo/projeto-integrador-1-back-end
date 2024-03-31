@@ -5,17 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8a46607-84d6-4ba1-86b6-a82d3513640c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../DiagramaER.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/../DiagramaER.drawio" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gerenciador_de_motoboys/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_motoboys/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gerenciador_de_motoboys/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_motoboys/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gerenciador_de_motoboys/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_motoboys/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gerenciador_de_pedidos/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_pedidos/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gerenciador_de_pedidos/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_pedidos/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gerenciador_de_pedidos/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_pedidos/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
