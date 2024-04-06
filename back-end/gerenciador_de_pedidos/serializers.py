@@ -1,13 +1,15 @@
 from django.utils import timezone
 from rest_framework import serializers
 from gerenciador_de_produtos.serializers import ProdutoSerializer
-from .models import Pedido
+from .models import Pedido, Cliente
 
 class PedidoSerializerResponse(serializers.ModelSerializer):
     produtos = serializers.SerializerMethodField()
+    cliente = serializers.PrimaryKeyRelatedField(read_only=True)
+
     class Meta:
         model = Pedido
-        fields = ['id', 'data_hora', 'produtos']
+        fields = ['id', 'data_hora', 'produtos', 'cliente']
         read_only_fields = ['data_hora']
 
     def create(self, validated_data):
@@ -22,7 +24,7 @@ class PedidoSerializerResponse(serializers.ModelSerializer):
 class PedidoSerializerRequest(serializers.ModelSerializer):
     class Meta:
         model = Pedido
-        fields = ['produtos']
+        fields = ['produtos', 'cliente']
         read_only_fields = ['data_hora']
 
     def create(self, validated_data):

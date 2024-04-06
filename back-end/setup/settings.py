@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'django_extensions',
     "gerenciador_de_motoboys.apps.GerenciadorDeMotoboysConfig",
     "gerenciador_de_funcionarios.apps.GerenciadorDeFuncionariosConfig",
     "gerenciador_de_clientes.apps.GerenciadorDeClientesConfig",
