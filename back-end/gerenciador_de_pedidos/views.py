@@ -10,6 +10,7 @@ from rest_framework.views import APIView
 
 class PedidoView(APIView):
     def post(self, request):
+        print(request.data)
         serializer = PedidoSerializerRequest(data=request.data)
         serializer.is_valid(raise_exception=True)
 
@@ -73,10 +74,11 @@ class PedidoUpdateView(APIView):
 
     def put(self, request, pk):
         pedido = self.get_object(pk)
-        serializer = PedidoSerializerResponse(pedido, data=request.data, partial=True)
+        serializer = PedidoSerializerRequest(instance=pedido, data=request.data, partial=True)
+        print(request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(serializer.data)
+        return Response("Atualizado com sucesso")
 
 
 class PedidoDeleteView(APIView):
