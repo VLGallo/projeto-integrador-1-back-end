@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8a46607-84d6-4ba1-86b6-a82d3513640c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_models.dot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_models.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gerenciador_de_pedidos/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_pedidos/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gerenciador_de_produtos/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_produtos/serializers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +45,7 @@
     "Python.views.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "last_opened_file_path": "C:/Users/nessi/Documents/GitHub/projeto-integrador-1/back-end",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
