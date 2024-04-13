@@ -5,7 +5,7 @@ class Funcionario(models.Model):
     nome = models.CharField(max_length=200)
     cpf = models.CharField(max_length=14)
     email = models.EmailField(max_length=254)
-    usuario = models.CharField(max_length=100)
+    usuario = models.CharField(max_length=100, unique=True)
     senha = models.CharField(max_length=100)
 
     def __str__(self):

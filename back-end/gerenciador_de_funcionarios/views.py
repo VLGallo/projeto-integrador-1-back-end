@@ -1,9 +1,12 @@
 from rest_framework.exceptions import NotFound
+from django.shortcuts import get_object_or_404
 from .models import Funcionario
 from .serializers import FuncionarioSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.contrib.auth import authenticate, login
+
 
 class FuncionarioView(APIView):
     def post(self, request):
@@ -61,3 +64,14 @@ class FuncionarioDeleteView(APIView):
         funcionario = self.get_object(pk)
         funcionario.delete()
         return Response(status=status.HTTP_202_ACCEPTED, data="Funcionário deletado com sucesso")
+
+
+class FuncionarioLoginView(APIView):
+    def post(self, request):
+        usuario = request.data.get('usuario')
+        senha = request.data.get('senha')
+        funcionario = get_object_or_404(Funcionario, usuario=usuario)
+        if funcionario is not None and funcionario.usuario == usuario and funcionario.senha == senha:
+            return Response(data={"message": "Login bem-sucedido"}, status=status.HTTP_200_OK)
+        else:
+            return Response(data={"message": "Credenciais inválidas"}, status=status.HTTP_401_UNAUTHORIZED)
