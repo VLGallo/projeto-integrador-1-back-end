@@ -2,6 +2,7 @@ from gerenciador_de_clientes.models import Cliente
 from gerenciador_de_clientes.serializers import ClienteSerializer
 from gerenciador_de_funcionarios.models import Funcionario
 from gerenciador_de_funcionarios.serializers import FuncionarioSerializer
+from gerenciador_de_motoboys.models import Motoboy
 from .models import Pedido
 from .serializers import PedidoSerializerRequest, PedidoSerializerResponse
 from rest_framework import status
@@ -33,11 +34,9 @@ class PedidoListView(APIView):
         pedidos = Pedido.objects.all()
         pedidos_data = []
 
-
         for pedido in pedidos:
             pedido_data = PedidoSerializerResponse(pedido).data
 
-            # Adiciona informações sobre o cliente
             cliente_id = pedido_data['cliente']
             try:
                 cliente = Cliente.objects.get(pk=cliente_id)
@@ -45,7 +44,6 @@ class PedidoListView(APIView):
             except Cliente.DoesNotExist:
                 pedido_data['cliente'] = None
 
-            # Adiciona informações sobre o funcionário
             funcionario_id = pedido.funcionario_id
             if funcionario_id:
                 try:
@@ -59,10 +57,11 @@ class PedidoListView(APIView):
             else:
                 pedido_data['funcionario'] = None
 
-        total = sum(float(produto['preco']) for produto in pedido_data['produtos'])
-        pedido_data['total'] = total
 
-        pedidos_data.append(pedido_data)
+            total = sum(float(produto['preco']) for produto in pedido_data['produtos'])
+            pedido_data['total'] = total
+
+            pedidos_data.append(pedido_data)
 
         return Response(data=pedidos_data, status=status.HTTP_200_OK)
 
@@ -133,3 +132,23 @@ class PedidoDeleteView(APIView):
                             status=status.HTTP_400_BAD_REQUEST)
         pedido.delete()
         return Response(status=status.HTTP_202_ACCEPTED, data="Pedido deletado com sucesso")
+
+
+
+class PedidoAssignMotoboyView(APIView):
+    def put(self, request, pk, motoboy_id):
+        try:
+            pedido = Pedido.objects.get(pk=pk)
+        except Pedido.DoesNotExist:
+            raise NotFound("Pedido não encontrado")
+
+        try:
+            motoboy = Motoboy.objects.get(pk=motoboy_id)
+        except Motoboy.DoesNotExist:
+            return Response("Motoboy não encontrado", status=status.HTTP_400_BAD_REQUEST)
+
+        pedido.motoboy = motoboy
+        pedido.save()
+
+        serializer = PedidoSerializerResponse(pedido)
+        return Response(serializer.data, status=status.HTTP_200_OK)

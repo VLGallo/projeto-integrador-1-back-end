@@ -5,7 +5,6 @@ from .serializers import FuncionarioSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.contrib.auth import authenticate, login
 
 
 class FuncionarioView(APIView):

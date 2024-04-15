@@ -2,14 +2,16 @@ from django.db import models
 from gerenciador_de_clientes.models import Cliente
 from gerenciador_de_funcionarios.models import Funcionario
 from gerenciador_de_produtos.models import Produto
+from gerenciador_de_motoboys.models import Motoboy
 
 
 class Pedido(models.Model):
     data_hora = models.DateTimeField()
     produtos = models.ManyToManyField(Produto)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True, blank=True)
-    funcionario = models.ForeignKey(Funcionario, on_delete=models.CASCADE, related_name='pedidos', null=True,
-                                    blank=True)
+    funcionario = models.ForeignKey(Funcionario, on_delete=models.CASCADE, related_name='pedidos', null=True, blank=True)
+    motoboy = models.ForeignKey(Motoboy, on_delete=models.SET_NULL, null=True, blank=True)
+
 
     def __str__(self):
         return f"Pedido em {self.data_hora} para {self.cliente}"
