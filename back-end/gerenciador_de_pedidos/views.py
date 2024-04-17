@@ -9,6 +9,7 @@ from rest_framework import status
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from datetime import datetime
 
 
 class PedidoView(APIView):
@@ -109,13 +110,24 @@ class PedidoUpdateView(APIView):
         pedido = self.get_object(pk)
         data = request.data.copy()
 
+        # Verificar se o campo 'status' está presente nos dados recebidos
+        if 'status' in data:
+            # Verificar se o novo status é válido
+            novo_status = data['status']
+            if novo_status in ['entregue', 'cancelado']:
+                pedido.status = novo_status
+                pedido.save()
+                return Response("Status do pedido atualizado com sucesso", status=status.HTTP_200_OK)
+            else:
+                return Response({"error": f"Status '{novo_status}' inválido"}, status=status.HTTP_400_BAD_REQUEST)
+
         if 'funcionario' not in data:
-            return Response({"error": "O campo 'funcionario' é obrigatório"}, status=400)
+            return Response({"error": "O campo 'funcionario' é obrigatório"}, status=status.HTTP_400_BAD_REQUEST)
 
         serializer = PedidoSerializerRequest(instance=pedido, data=data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response("Atualizado com sucesso")
+        return Response("Atualizado com sucesso", status=status.HTTP_200_OK)
 
 
 class PedidoDeleteView(APIView):
@@ -152,3 +164,34 @@ class PedidoAssignMotoboyView(APIView):
 
         serializer = PedidoSerializerResponse(pedido)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+class PedidoActionView(APIView):
+    def post(self, request, pk, action):
+        # Verificar se o pedido existe
+        try:
+            pedido = Pedido.objects.get(pk=pk)
+        except Pedido.DoesNotExist:
+            raise NotFound("Pedido não encontrado")
+
+        # Verificar se a ação é válida (entrega ou cancelamento)
+        if action not in ['entregar', 'cancelar']:
+            return Response("Ação inválida", status=status.HTTP_400_BAD_REQUEST)
+
+        # Atualizar o status do pedido de acordo com a ação
+        if action == 'entregar':
+            pedido.status = 'entregue'
+        elif action == 'cancelar':
+            pedido.status = 'cancelado'
+
+        # Adicionar data e hora atual apenas se o pedido for entregue ou cancelado
+        if action in ['entregar', 'cancelar']:
+            pedido.data_hora = datetime.now()
+
+        pedido.save()
+
+        serializer = PedidoSerializerResponse(pedido)
+        response_data = serializer.data
+        response_data['status'] = pedido.status
+        return Response(response_data, status=status.HTTP_200_OK)

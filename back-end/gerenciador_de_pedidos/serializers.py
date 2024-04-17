@@ -14,17 +14,17 @@ class PedidoSerializerResponse(serializers.ModelSerializer):
         fields = ['id', 'data_hora', 'produtos', 'cliente', 'funcionario', 'motoboy']
         read_only_fields = ['data_hora']
 
-    def create(self, validated_data):
-        validated_data['data_hora'] = timezone.now()
-        return super().create(validated_data)
-
-    def update(self, instance, validated_data):
-        instance.produtos.set(validated_data.get('produtos', instance.produtos))
-        instance.cliente = validated_data.get('cliente', instance.cliente)
-        instance.funcionario = validated_data.get('funcionario', instance.funcionario)
-        instance.motoboy = validated_data.get('motoboy', instance.motoboy)
-        instance.save()
-        return instance
+    # def create(self, validated_data):
+    #     validated_data['data_hora'] = timezone.now()
+    #     return super().create(validated_data)
+    #
+    # def update(self, instance, validated_data):
+    #     instance.produtos.set(validated_data.get('produtos', instance.produtos))
+    #     instance.cliente = validated_data.get('cliente', instance.cliente)
+    #     instance.funcionario = validated_data.get('funcionario', instance.funcionario)
+    #     instance.motoboy = validated_data.get('motoboy', instance.motoboy)
+    #     instance.save()
+    #     return instance
 
 
     def validate_funcionario(self, value):
