@@ -9,7 +9,7 @@ from rest_framework import status
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from datetime import datetime
+from datetime import datetime, date
 
 class PedidoView(APIView):
     def post(self, request):
@@ -186,7 +186,11 @@ class PedidosAtribuidosMotoboyView(APIView):
         except Motoboy.DoesNotExist:
             return Response("Motoboy não encontrado", status=status.HTTP_404_NOT_FOUND)
 
-        pedidos = Pedido.objects.filter(motoboy=motoboy)
+        # Obtém a data atual
+        data_atual = date.today()
+
+        # Filtra os pedidos atribuídos ao motoboy na data atual
+        pedidos = Pedido.objects.filter(motoboy=motoboy, data_hora_inicio__date=data_atual)
 
         serializer = PedidoSerializerResponse(pedidos, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
