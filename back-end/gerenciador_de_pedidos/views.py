@@ -177,3 +177,16 @@ class PedidoActionView(APIView):
         response_data = serializer.data
         response_data['status'] = pedido.status
         return Response(response_data, status=status.HTTP_200_OK)
+
+
+class PedidosAtribuidosMotoboyView(APIView):
+    def get(self, request, motoboy_id):
+        try:
+            motoboy = Motoboy.objects.get(pk=motoboy_id)
+        except Motoboy.DoesNotExist:
+            return Response("Motoboy não encontrado", status=status.HTTP_404_NOT_FOUND)
+
+        pedidos = Pedido.objects.filter(motoboy=motoboy)
+
+        serializer = PedidoSerializerResponse(pedidos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
