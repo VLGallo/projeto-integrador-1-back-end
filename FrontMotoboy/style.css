@@ -1,0 +1,50 @@
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #B20000;
+    }
+
+    .container {
+        position: relative; /* Adiciona posição relativa para que a imagem posicionada absolutamente fique relativa a este container */
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column; 
+        align-items: center; 
+        text-align: center; 
+    }
+
+    h1 {
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        text-align: center;
+        color: #333;
+        margin: auto;
+    }
+
+    .pedido-info {
+        margin-bottom: 20px;
+    }
+
+    .pedido-info p {
+        margin: 8px 0;
+    }
+
+    .footer {
+        text-align: center;
+        margin-top: 20px;
+        color: white;
+    }
+
+    .imagemPizza {
+        position: absolute; /* Posiciona a imagem absolutamente */
+        top:    50px; /* Ajusta a distância entre a imagem e o container */
+        left: 72%; /* Coloca a imagem no centro horizontal da tela */
+        transform: translateX(-10%); /* Centraliza horizontalmente */
+        z-index: 1; /* Garante que a imagem esteja à frente do contêiner */
+
+    }
