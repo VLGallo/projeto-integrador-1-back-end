@@ -1,37 +1,113 @@
-import React from 'react';
-import { View, TextInput, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Text,
+  Image,
+  Pressable,
+} from "react-native";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
+import CustomModal from "../components/CustomModal";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const TelaLogin = () => {
   const navigation = useNavigation();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [usuario, setUsuario] = useState("");
+  const [senha, setSenha] = useState("");
 
-  const entrarTelaHome = () => {
-    navigation.navigate('TelaHome');
+  const getCookie = async () => {
+    const valorDoCookie = await AsyncStorage.getItem("usuario");
+    return valorDoCookie;
+  };
+
+  const verificaLogado = async () => {
+    try {
+      const cookie = await getCookie("usuario");
+      if (cookie) {
+        navigation.navigate("TelaHome");
+      }
+    } catch (error) {
+      console.error("Erro ao verificar se está logado:", error);
+    }
+  };
+
+  useEffect(() => {
+    verificaLogado();
+  }, []); // O segundo argumento vazio [] significa que este efeito só será executado após a primeira renderização
+
+
+  const setCookie = async (usuario) => {
+    try {
+      await AsyncStorage.setItem("usuario", usuario);
+      console.log("Cookie definido com sucesso");
+    } catch (error) {
+      console.error("Erro ao definir o cookie:", error);
+    }
+  };
+
+  const entrarTelaHome = async () => {
+    try {
+      const response = await axios.post("http://localhost:8000/login", {
+        usuario: usuario,
+        senha: senha,
+      });
+
+      console.log(response);
+
+      if (response.status === 200) {
+        navigation.navigate("TelaHome");
+        setCookie(usuario);
+      } else {
+        setModalVisible(true);
+      }
+    } catch (error) {
+      setModalVisible(true);
+      console.log(error);
+    }
   };
 
   return (
     <View style={styles.container}>
-      <View style={[styles.halfContainer, { backgroundColor: '#B20000' }]}>
-        <Image
-        source={require('../../assets/images/fundo-sombra.png')}
-        style={styles.image}
-        />
+      <CustomModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        modalText="Credenciais Inválidas"
+      />
+      <View style={{ flex: 2, flexDirection:"column", justifyContent:"center", alignItems:"center" , backgroundImage: "url(../../assets/images/bg-opaco.png)", backgroundColor: "#B20000"}}>
+        <View>
+          <Text style={styles.SistemaTitulo}>Gestão de Entregas</Text>
+          <Text style={styles.SistemaSubTitulo}>Casa Zé Rissi</Text>
+        </View>
       </View>
-      <View style={[styles.halfContainer, { backgroundColor: 'white' }]}>
+      <View style={ { flex: 1, backgroundColor: "white" }}>
         <View style={styles.rightHalfContent}>
           <Text style={styles.text}> Login </Text>
-          <TextInput style={styles.input} placeholder="Usuário" />
-          <TextInput style={styles.input} placeholder="Senha" />
-          <TouchableOpacity onPress={entrarTelaHome} style={styles.button}>
+          <TextInput
+            style={styles.input}
+            placeholder="Usuário"
+            value={usuario}
+            onChangeText={(text) => setUsuario(text)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Senha"
+            value={senha}
+            onChangeText={(text) => setSenha(text)}
+            secureTextEntry
+            focusable={true}
+          />
+          <Pressable onPress={entrarTelaHome} style={styles.button}>
             <Text style={styles.buttonText}>Entrar</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
 
       {/* Imagem no centro */}
       <Image
-        source={require('../../assets/images/logo.png')}
+        source={require("../../assets/images/logo.png")}
         style={[styles.imageLogo, styles.centerImage]}
       />
     </View>
@@ -41,57 +117,67 @@ const TelaLogin = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   halfContainer: {
     flex: 1,
   },
   rightHalfContent: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   text: {
     fontSize: 20,
     marginBottom: 10,
-    fontFamily: 'LuckiestGuy',
   },
   input: {
-    width: '80%',
+    width: "80%",
     height: 40,
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: "black",
     marginBottom: 10,
     paddingHorizontal: 10,
   },
   button: {
-    backgroundColor: '#015500',
+    backgroundColor: "#015500",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
   },
+  SistemaTitulo:{
+    fontFamily: "Impact", 
+    fontSize: 80,
+    color: "white"
+  },
+  SistemaSubTitulo:{
+    fontFamily: "Arial", 
+    fontWeight: "bold",
+    fontSize: 40,
+    color: "white"
+  },
   buttonText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   image: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
   },
   imageLogo: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
   },
   centerImage: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
+    position: "absolute",
+    top: "50%",
+    left: "65%",
     transform: [{ translateX: -200 }, { translateY: -10 }],
-    width: 300, 
-    height: 300, 
+    width: 300,
+    height: 300,
   },
 });
 

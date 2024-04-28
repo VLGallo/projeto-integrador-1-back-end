@@ -1,220 +1,307 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Picker } from 'react-native'; // Importe Picker
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  StyleSheet,
+  Image,
+  Picker,
+} from "react-native";
+import {
+  FormControlLabel,
+  Checkbox,
+  Grid,
+  Typography,
+  IconButton,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
+import Template from "../components/TemplatePrincipal";
+import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
+import CustomModal from "../components/CustomModal";
 
-const TelaAtribuicao = () => {
-    const navigation = useNavigation();
+const TelaHome = () => {
+  const navigation = useNavigation();
 
-    const [pedido, setPedido] = useState('');
-    const [motoboy, setMotoboy] = useState('');
-    const [pedidos, setPedidos] = useState([]);
+  const [pedido, setPedido] = useState("");
+  const [selectedMotoboy, setSelectedMotoboy] = useState("");
+  const [selectedPedido, setSelectedPedido] = useState("");
+  const [motoboys, setMotoboys] = useState("");
+  const [pedidos, setPedidos] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedPedidos, setSelectedPedidos] = useState([]);
+  const [carregandoMotoboys, setCarregandoMotoboys] = useState(true);
+  const [carregandoPedidos, setCarregandoPedidos] = useState(true);
 
-    const handleAtribuicao = () => {
-        // Aqui você pode implementar a lógica para salvar os dados
+
+  useEffect(() => {console.log(selectedMotoboy)})
+
+  useEffect(() => {
+    const carregarMotoboy = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/motoboy");
+
+        setMotoboys(response.data);
+        setCarregandoMotoboys(false);
+      } catch (error) {
+        console.log(error);
+      }
     };
-    
-    const handleCancelar = () => {
-        // Limpa os campos
-        setPedido('');
-        setMotoboy('');
-        setPedidos([]);
+
+    const carregarPedidos = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/pedido");
+        console.log(response.data);
+        setPedidos(response.data);
+        setCarregandoPedidos(false);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
-    const adicionarPedido = () => {
-        setPedidos([...pedidos, '']);
-    };
+    carregarMotoboy();
+    carregarPedidos();
+  }, []);
 
-    const removerPedido = (index) => {
-        const novosPedidos = [...pedidos];
-        novosPedidos.splice(index, 1);
-        setPedidos(novosPedidos);
-    };
+  const handleAtribuicao = async () => {
+    for (let i = 0; i < selectedPedidos.length; i++) {
+      try {
+        const response = await axios.put(
+          "http://localhost:8000/pedido/" +
+            selectedPedidos[i] +
+            "/atribuir-motoboy/" +
+            selectedMotoboy
+        );
+      } catch (error) {
+        setModalVisible(true);
+        console.log(error);
+      }
+      
+      setModalVisible(true);
+    }
+  };
 
-    const entrarTelaHome = () => {
-        navigation.navigate('TelaHome');
-    };
+  const handleCancelar = () => {
+    setSelectedPedidos([]);
+    setSelectedMotoboy('');
+  };
 
-    const entrarTelaPedido = () => {
-        navigation.navigate('TelaPedido');
-    };
+  const buscarPedido = (pedidoId) => {
+    const pedidoEncontrado = pedidos.find((pedido) => pedido.id == pedidoId);
+    console.log("Pedido encontrado: " + pedidoEncontrado, pedidoId);
+    return pedidoEncontrado;
+  };
 
-    const entrarTelaAtribuicao = () => {
-        navigation.navigate('TelaAtribuicao');
-    };
+  const adicionarPedido = () => {
+    setSelectedPedidos([...selectedPedidos, selectedPedido]);
+    setSelectedPedido("");
+  };
 
-    const entrarTelaCadastro = () => {
-        navigation.navigate('TelaCadastro');
-    };
+  const removerPedido = (index) => {
+    const novosPedidos = [...selectedPedidos];
+    novosPedidos.splice(index, 1);
+    setSelectedPedidos(novosPedidos);
+  };
 
-    return (
-        <View style={styles.containerPrincipal}>
-            {/* Menu superior */}
-            <View style={styles.menuSuperior}>
-                <TouchableOpacity onPress={entrarTelaHome} style={styles.menuButton}>
-                    <Text style={styles.menuButtonText}>Home</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={entrarTelaPedido} style={styles.menuButton}>
-                    <Text style={styles.menuButtonText}>Pedido</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={entrarTelaAtribuicao} style={styles.menuButton}>
-                    <Text style={styles.menuButtonText}>Atribuição</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.menuButton}>
-                    <Text style={styles.menuButtonText}>Relatório</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={entrarTelaCadastro} style={styles.menuButton}>
-                    <Text style={styles.menuButtonText}>Cadastro</Text>
-                </TouchableOpacity>
-            </View>
-
-            {/* Conteúdo do pedido */}
-            <View style={styles.containerSecundario}>
-                <View style={styles.tituloContainer}>
-                    <Text style={[styles.textPedido, { fontSize: 40 }]}> Atribuição de Pedidos</Text> {/* Aumentando o tamanho da fonte */}
-                    <Image
-                        source={require('../../assets/images/atribuicaoIcone.png')}
-                        style={[styles.image, styles.posicaoImage]}
-                        resizeMode="contain"
-                    />
-                </View>
-
-                <View style={{ position: 'absolute', top: 100, right: 0 }}>
-            <Image
-                source={require('../../assets/images/logo.png')}
-                style={[styles.image, { width: 220, height: 280 }]}                
-                resizeMode="contain"
-            />
-                </View>
-
-       
-                {/* Campos de pedidos */}
-                <Text style={styles.label}>Pedidos</Text>
-                {pedidos.map((pedido, index) => (
-                    <View key={index} style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <TextInput
-                            style={[styles.input, { flex: 1 }]}
-                            value={pedido}
-                            onChangeText={(texto) => {
-                                const novosPedidos = [...pedidos];
-                                novosPedidos[index] = texto;
-                                setPedidos(novosPedidos);
-                            }}
-                        />
-                        <TouchableOpacity onPress={() => removerPedido(index)} style={{marginLeft:10}}>
-                            <Image source={require('../../assets/images/Minus.png')} style={{ width: 30, height: 30 }} />
-                        </TouchableOpacity>
-                    </View>
-                ))}
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <TouchableOpacity onPress={adicionarPedido}>
-                        <Image source={require('../../assets/images/More.png')} style={{ width: 30, height: 30 }} />
-                    </TouchableOpacity>
-                </View>
-
-                <Text style={styles.label}>Motoboy</Text>
-                <Picker
-                    selectedValue={motoboy}
-                    onValueChange={(itemValue, itemIndex) => setMotoboy(itemValue)}
-                    style={styles.input}
-                >
-                    <Picker.Item label="Selecione um motoboy" value="" />
-                    <Picker.Item label="Motoboy 1" value="Motoboy 1" />
-                    <Picker.Item label="Motoboy 2" value="Motoboy 2" />
-                    <Picker.Item label="Motoboy 3" value="Motoboy 3" />
-                    {/* Adicione mais itens conforme necessário */}
-                </Picker>
-
-                <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity style={[styles.button, { marginRight: 10 }]} onPress={handleAtribuicao}>
-                        <Text style={styles.buttonText}>Atribuir</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[styles.button, { backgroundColor: '#B20000' }]} onPress={handleCancelar}>
-                        <Text style={styles.buttonText}>Cancelar</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+  return (
+    <Template imagem={"../../assets/images/bg-opaco.png"}>
+      <CustomModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        modalText="Pedidos atribuidos com sucesso"
+      />
+      {/* Conteúdo do pedido */}
+      <View style={styles.containerSecundario}>
+        <View style={styles.tituloContainer}>
+          <Text style={[styles.textPedido, { fontSize: 40 }]}>
+            Atribuição de Pedidos
+          </Text>
+          <Image
+            source={require("../../assets/images/atribuicaoIcone.png")}
+            style={[styles.image, styles.posicaoImage]}
+            resizeMode="contain"
+          />
         </View>
-    );
+
+        <View style={{ flexDirection: "row" }}>
+          <View style={{ flex: 2, flexDirection: "column" }}>
+            <View>
+              <Text style={styles.label}>Motoboy</Text>
+              <Picker
+                selectedValue={selectedMotoboy}
+                onValueChange={(itemValue, itemIndex) =>
+                  setSelectedMotoboy(itemValue)
+                }
+                style={styles.input}
+              >
+                <Picker.Item label="Selecione um motoboy" value="" />
+                {!carregandoMotoboys &&
+                  motoboys.map((motoboy) => (
+                    <Picker.Item
+                      key={motoboy.id}
+                      label={motoboy.nome}
+                      value={motoboy.id}
+                    />
+                  ))}
+              </Picker>
+            </View>
+
+            <View style={{ marginTop: 20 }}>
+              <Grid container direction="column" spacing={0}>
+                <Typography style={{ fontWeight: "bold" }}>Itens</Typography>
+                {selectedPedidos.map((item, index) => (
+                  <Grid item container key={index} alignItems="center">
+                    <Grid item xs={8}>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={true} // Altere para o estado do checkbox
+                            onChange={() => {}}
+                            color="primary"
+                          />
+                        }
+                        label={buscarPedido(item).id}
+                      />
+                    </Grid>
+                    <Grid item xs={2}>
+                      <IconButton onClick={() => removerPedido(index)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                ))}
+                <Grid item container alignItems="center">
+                  <Grid item xs={8}>
+                    <select
+                      style={styles.input}
+                      value={selectedPedido}
+                      onChange={(e) => setSelectedPedido(e.target.value)}
+                    >
+                      <option value="">Selecione um Pedido</option>
+                      {pedidos.map((pedido) => (
+                        <option key={pedido.id} value={pedido.id}>
+                          {pedido.id}
+                        </option>
+                      ))}
+                    </select>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <IconButton onClick={adicionarPedido}>
+                      <AddIcon />
+                    </IconButton>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </View>
+
+            <View style={{ flexDirection: "row" }}>
+              <Pressable
+                style={[styles.button, { marginRight: 10 }]}
+                onPress={handleAtribuicao}
+              >
+                <Text style={styles.buttonText}>Atribuir</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.button, { backgroundColor: "#B20000" }]}
+                onPress={handleCancelar}
+              >
+                <Text style={styles.buttonText}>Cancelar</Text>
+              </Pressable>
+            </View>
+          </View>
+          <View style={{ flex: 1 }}>
+            <Image
+              source={require("../../assets/images/logo.png")}
+              style={[styles.image, { width: 220, height: 280 }]}
+              resizeMode="contain"
+            />
+          </View>
+        </View>
+      </View>
+    </Template>
+  );
 };
 
 const styles = StyleSheet.create({
-    containerPrincipal: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'stretch',
-        justifyContent: 'flex-start',
-        padding: 16,
-        backgroundColor: '#fff',
-        overflowY: 'auto', // Habilita a rolagem vertical
-        height: '100vh', // Define a altura do container para ocupar toda a altura da tela
-    },
-    containerSecundario: {
-        flex: 1,
-        marginTop: 50,
-    },
-    image: {
-        width: 80,
-        height: 100,
-    },
-    textPedido: {
-        fontWeight: 'bold',
-        color: '#B20000',
-        textAlign: 'center', // Centralizando o texto
-    },
-    label: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        marginBottom: 8,
-    },
-    input: {
-        height: 40,
-        borderColor: '#ccc',
-        borderWidth: 1,
-        borderRadius: 4,
-        marginBottom: 16,
-        paddingHorizontal: 5,
-        width: '80%',
-
-    },
-    button: {
-        backgroundColor: '#015500',
-        borderRadius: 10,
-        paddingVertical: 15,
-        paddingHorizontal: 15,
-        alignItems: 'center',
-    },
-    buttonText: {
-        color: 'white',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    posicaoImage: {
-        marginLeft: 20,
-    },
-    menuSuperior: {
-        flexDirection: 'row',
-        justifyContent: 'center', // Centralizando os botões
-        alignItems: 'center',
-        marginTop: 20,
-    },
-    menuButton: {
-        backgroundColor: '#015500',
-        borderRadius: 10,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        marginRight: 10,
-    },
-    menuButtonText: {
-        color: 'white',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    tituloContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center', // Centralizando os elementos dentro do container do título
-        marginBottom: 20,
-    },
+  containerPrincipal: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "stretch",
+    justifyContent: "flex-start",
+    padding: 16,
+    backgroundColor: "#fff",
+    overflowY: "auto", // Habilita a rolagem vertical
+    height: "100vh", // Define a altura do container para ocupar toda a altura da tela
+  },
+  containerSecundario: {
+    flex: 1,
+    marginTop: 50,
+    flexDirection: "column",
+  },
+  image: {
+    width: 80,
+    height: 100,
+  },
+  textPedido: {
+    fontWeight: "bold",
+    color: "#B20000",
+    textAlign: "center", // Centralizando o texto
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
+  input: {
+    height: 40,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 4,
+    marginBottom: 16,
+    paddingHorizontal: 5,
+    width: "80%",
+  },
+  button: {
+    backgroundColor: "#015500",
+    borderRadius: 10,
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  posicaoImage: {
+    marginLeft: 20,
+  },
+  menuSuperior: {
+    flexDirection: "row",
+    justifyContent: "center", // Centralizando os botões
+    alignItems: "center",
+    marginTop: 20,
+  },
+  menuButton: {
+    backgroundColor: "#015500",
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginRight: 10,
+  },
+  menuButtonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  tituloContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center", // Centralizando os elementos dentro do container do título
+    marginBottom: 20,
+  },
 });
 
-export default TelaAtribuicao;
+export default TelaHome;

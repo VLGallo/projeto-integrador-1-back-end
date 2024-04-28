@@ -3,6 +3,8 @@ from rest_framework import serializers
 from gerenciador_de_produtos.serializers import ProdutoSerializer
 from .models import Pedido
 
+from django.utils import timezone
+
 class PedidoSerializerResponse(serializers.ModelSerializer):
     produtos = serializers.SerializerMethodField()
     cliente = serializers.PrimaryKeyRelatedField(read_only=True)
@@ -35,5 +37,5 @@ class PedidoSerializerRequest(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
-        validated_data['data_hora_inicio'] = datetime.now()
+        validated_data['data_hora_inicio'] = timezone.now()
         return super().create(validated_data)

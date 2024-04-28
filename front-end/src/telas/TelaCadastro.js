@@ -1,187 +1,160 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  StyleSheet,
+  Image,
+} from "react-native";
+import Template from "../components/TemplatePrincipal";
+import CustomModal from "../components/CustomModal";
+import axios from "axios";
 
 const TelaCadastro = () => {
-    const navigation = useNavigation();
 
-    const [nome, setnome] = useState('');
-    const [telefone, settelefone] = useState('');
-    const [placa, setplaca] = useState('');
+  const [modalVisible, setModalVisible] = useState("");
+  const [nome, setNome] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [placa, setPlaca] = useState("");
 
-    const handleSalvar = () => {
-        // Aqui você pode implementar a lógica para salvar os dados
+  const handleSalvar = async () => {
+    try {
+      const response = await axios.post("http://localhost:8000/motoboy/add", {
+        nome: nome,
+        telefone: telefone,
+        placa: placa,
+        funcionario: 2,
+      });
+      console.log(response);
 
-    };
+      if (response.status === 201) {
+        setModalVisible(true);
+        setNome("");
+        setTelefone("");
+        setPlaca("");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    const handleCancelar = () => {
-        // Limpar os campos
-        setnome('');
-        settelefone('');
-        setTelefone('');
-    };
+  const handleCancelar = () => {
+    // Limpar os campos
+    setNome("");
+    setTelefone("");
+    setPlaca("");
+  };
 
-    const entrarTelaHome = () => {
-        navigation.navigate('TelaHome'); // Navega para a tela de pedido
-    };
+  return (
+    <Template imagem={"../../assets/images/bg-opaco.png"}>
+      <CustomModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        modalText="Cadastrado com sucesso"
+      />
 
-    const entrarTelaPedido = () => {
-        navigation.navigate('TelaPedido'); // Navega para a tela de pedido
-    };
-    const entrarTelaAtribuicao = () => {
-        navigation.navigate('TelaAtribuicao');
-    };
+      <View style={styles.tituloContainer}>
+        <Text style={[styles.textPedido, { fontSize: 60 }]}>
+          Cadastro de Entregadores
+        </Text>
+      </View>
 
-    const entrarTelaCadastro = () => {
-        navigation.navigate('TelaCadastro');
-    };
-
-
-    return (
-        <View style={styles.containerPrincipal}>
-            {/* Menu superior */}
-            <View style={styles.menuSuperior}>
-                <TouchableOpacity onPress={entrarTelaHome} style={styles.menuButton}>
-                    <Text style={styles.menuButtonText}>Home</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={entrarTelaPedido} style={styles.menuButton}>
-                    <Text style={styles.menuButtonText}>Pedido</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={entrarTelaAtribuicao} style={styles.menuButton}>
-                    <Text style={styles.menuButtonText}>Atribuição</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.menuButton}>
-                    <Text style={styles.menuButtonText}>Relatório</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={entrarTelaCadastro} style={styles.menuButton}>
-                    <Text style={styles.menuButtonText}>Cadastro</Text>
-                </TouchableOpacity>
-            </View>
-
-            {/* Conteúdo do pedido */}
-            <View style={styles.containerSecundario}>
-                <View style={styles.tituloContainer}>
-                    <Text style={[styles.textPedido, { fontSize: 40 }]}>Cadastro de Entregadores</Text> {/* Aumentando o tamanho da fonte */}
-                    <Image
-                        source={require('../../assets/images/cadastroMotoboy.png')}
-                        style={[styles.image, styles.posicaoImage]}
-                        resizeMode="contain"
-                    />
-                </View>
-
-                <View style={{ position: 'absolute', top: 100, right: 0 }}>
-            <Image
-                source={require('../../assets/images/logo.png')}
-                style={[styles.image, { width: 220, height: 280 }]}                
-                resizeMode="contain"
+      <View style={{ flexDirection: "row" }}>
+        <View style={{ flex: 3 }}>
+          <View>
+            <Text style={styles.label}> Nome</Text>
+            <TextInput
+              style={styles.input}
+              value={nome}
+              onChangeText={setNome}
             />
-                </View>
-
-                <Text style={styles.label}> Nome</Text>
-                <TextInput
-                    style={styles.input}
-                    value={nome}
-                    onChangeText={setnome}
-                />
-                <Text style={styles.label}>Telefone</Text>
-                <TextInput
-                    style={styles.input}
-                    value={telefone}
-                    onChangeText={settelefone}
-                />
-                <Text style={styles.label}>Placa</Text>
-                <TextInput
-                    style={styles.input}
-                    value={placa}
-                    onChangeText={setplaca}
-                />
-                <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity style={[styles.button, { marginRight: 10 }]} onPress={handleSalvar}>
-                        <Text style={styles.buttonText}>Salvar</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[styles.button, { backgroundColor: '#B20000' }]} onPress={handleCancelar}>
-                        <Text style={styles.buttonText}>Cancelar</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+          </View>
+          <View>
+            <Text style={styles.label}>Telefone</Text>
+            <TextInput
+              style={styles.input}
+              value={telefone}
+              onChangeText={setTelefone}
+            />
+          </View>
+          <View>
+            <Text style={styles.label}>Placa</Text>
+            <TextInput
+              style={styles.input}
+              value={placa}
+              onChangeText={setPlaca}
+            />
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            <Pressable
+              style={[styles.button, { marginRight: 10 }]}
+              onPress={handleSalvar}
+            >
+              <Text style={styles.buttonText}>Salvar</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.button, { backgroundColor: "#B20000" }]}
+              onPress={handleCancelar}
+            >
+              <Text style={styles.buttonText}>Cancelar</Text>
+            </Pressable>
+          </View>
         </View>
-    );
+
+        <View style={{ flex: 1 }}>
+          <Image
+            source={require("../../assets/images/logo.png")}
+            style={[styles.image, { width: 220, height: 280 }]}
+            resizeMode="contain"
+          />
+        </View>
+      </View>
+    </Template>
+  );
 };
 
-const styles = StyleSheet.create({
-    containerPrincipal: {
-        flex: 1,
-        padding: 16,
-        backgroundColor: '#fff',
-        position: 'relative',
-    },
-    containerSecundario: {
-        flex: 1,
-        marginTop: 50,
-    },
-    image: {
-        width: 80,
-        height: 100,
-    },
-    textPedido: {
-        fontWeight: 'bold',
-        color: '#B20000',
-        textAlign: 'center', // Centralizando o texto
-    },
-    label: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        marginBottom: 8,
-    },
-    input: {
-        height: 40,
-        borderColor: '#ccc',
-        borderWidth: 1,
-        borderRadius: 4,
-        marginBottom: 16,
-        paddingHorizontal: 5,
-        width: '80%',
 
-    },
-    button: {
-        backgroundColor: '#015500',
-        borderRadius: 10,
-        paddingVertical: 15,
-        paddingHorizontal: 15,
-        alignItems: 'center',
-    },
-    buttonText: {
-        color: 'white',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    posicaoImage: {
-        marginLeft: 20,
-    },
-    menuSuperior: {
-        flexDirection: 'row',
-        justifyContent: 'center', // Centralizando os botões
-        alignItems: 'center',
-        marginTop: 20,
-    },
-    menuButton: {
-        backgroundColor: '#015500',
-        borderRadius: 10,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        marginRight: 10,
-    },
-    menuButtonText: {
-        color: 'white',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    tituloContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center', // Centralizando os elementos dentro do container do título
-        marginBottom: 20,
-    },
+const styles = StyleSheet.create({
+   label: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
+  input: {
+    height: 40,
+    width: 150,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 4,
+    marginBottom: 16,
+    paddingHorizontal: 5,
+    backgroundColor: "#fff",
+    width: "80%",
+  },
+  button: {
+    backgroundColor: "#015500",
+    borderRadius: 10,
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  tituloContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center", 
+    marginBottom: 20,
+  },
+  textPedido:{
+    fontFamily: "Impact",
+    color: 'rgb(178, 0, 0)'
+  }
 });
+
 
 export default TelaCadastro;
