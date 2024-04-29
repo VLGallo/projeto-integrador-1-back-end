@@ -5,24 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8a46607-84d6-4ba1-86b6-a82d3513640c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gerenciador_de_clientes/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_clientes/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gerenciador_de_pedidos/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_pedidos/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/assets/favicon.png" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/assets/favicon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/assets/images/fundo-sombra.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/assets/images/imagem-home.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/navigation/Navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/navigation/Navigation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/telas/TelaAtribuicao.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/telas/TelaAtribuicao.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/telas/TelaCadastro.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/telas/TelaCadastro.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/telas/TelaHome.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/telas/TelaHome.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/telas/TelaLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/telas/TelaLogin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/telas/TelaPedido.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/telas/TelaPedido.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/src/telas/TelaRelatorio.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/telas/TelaRelatorio.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
