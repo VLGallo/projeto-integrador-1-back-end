@@ -10,56 +10,53 @@ import {
 import Template from "../components/TemplatePrincipal";
 import axios from "axios";
 import { Accordion, List } from "react-native-paper";
+import {
+  FormControlLabel,
+  Checkbox,
+  Grid,
+  Typography,
+  IconButton,
+} from "@mui/material";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 
 const TelaHome = () => {
   const [motoboys, setMotoboys] = useState([]);
   const [pedidosDoDia, setPedidosDoDia] = useState([]);
-  const [carregandoMotoboys, setCarregandoMotoboys] = useState("");
+  const [carregandoMotoboys, setCarregandoMotoboys] = useState(false);
   const [carregandoPedidosDoDia, setCarregandoPedidosDoDia] = useState("");
 
   useEffect(() => {
-    const carregarMotoboys = async () => {
+    const carregarPedidosDoDia = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/motoboy");
-        setMotoboys(response.data);
-        setCarregandoMotoboys(false);
+        setCarregandoMotoboys(true);
+
+        const response = await axios.get(
+          "http://localhost:8000/pedido/motoboy/"
+        );
+
+        setPedidosDoDia(response.data);
+        console.log(response.data);
+        setCarregandoPedidosDoDia(false);
       } catch (error) {
         console.log(error);
       }
     };
 
-    carregarMotoboys();
-  }, []);
-
-  useEffect(() => {
-    const carregarPedidosDoDia = async () => {
-        try {
-            let pedidosDia = [];
-            for (let i = 0; i < motoboys.length; i++) {
-                const response = await axios.get(
-                    "http://localhost:8000/pedido/motoboy/" + motoboys[i].id
-                );
-                // Verifique se o vetor retornado não está vazio
-                if (response.data.length > 0) {
-                    pedidosDia.push(response.data);
-                }
-            }
-
-            setPedidosDoDia(pedidosDia);
-            setCarregandoPedidosDoDia(false);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
     carregarPedidosDoDia();
-}, []); // Certifique-se de passar um array vazio como segundo argumento para useEffect para garantir que ele só execute uma vez
-
+  }, []);
 
   return (
     <Template imagem={"../../assets/images/bg-opaco.png"}>
       <View style={styles.tituloContainer}>
-        <Text style={[styles.textPedido, { fontSize: 40 }]}>
+        <Text style={[styles.textPedido, { fontSize: 60 }]}>
           Relatório de Entregas
         </Text>
         <Image
@@ -68,23 +65,58 @@ const TelaHome = () => {
           resizeMode="contain"
         />
       </View>
-
-      {!carregandoPedidosDoDia &&
-        pedidosDoDia.map((pedido, index) => (
-          <Accordion key={index} title={`Motoboy ${pedido}`}>
-            <List.Accordion>
-              {pedido.map((pedidoItem, subIndex) => (
-                <List.Item
-                  key={subIndex}
-                  title={`Pedido ${pedidoItem.id}`}
-                  description={`Produtos: ${pedidoItem.produtos.length}`}
-                />
-              ))}
-            </List.Accordion>
-          </Accordion>
-        ))}
+  
+      {!carregandoPedidosDoDia && (
+        <View style={styles.container}>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Motoboy</TableCell>
+                  <TableCell>Pedido</TableCell>
+                  <TableCell>Finalização</TableCell>
+                  <TableCell>Qtd de Pedidos Entregues</TableCell> {/* Nova coluna */}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Object.keys(pedidosDoDia).map((motoboyId) => (
+                  <TableRow key={motoboyId}>
+                    <TableCell>
+                      {pedidosDoDia[motoboyId].motoboy.nome}
+                    </TableCell>
+                    <TableCell>
+                      <ul>
+                        {pedidosDoDia[motoboyId].pedidos.map((pedido) => (
+                          <li key={pedido.id}>{pedido.id}</li>
+                        ))}
+                      </ul>
+                    </TableCell>
+                    <TableCell>
+                      <ul>
+                        {pedidosDoDia[motoboyId].pedidos.map((pedido) => (
+                          <li key={pedido.id}>
+                            {pedido.data_hora_finalizacao
+                              ? new Date(
+                                  pedido.data_hora_finalizacao
+                                ).toLocaleString()
+                              : "-"}
+                          </li>
+                        ))}
+                      </ul>
+                    </TableCell>
+                    <TableCell> {/* Nova célula */}
+                      {pedidosDoDia[motoboyId].pedidos.length} {/* Calcula a quantidade de pedidos */}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </View>
+      )}
     </Template>
   );
+  
 };
 
 const styles = StyleSheet.create({
@@ -96,6 +128,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#B20000",
     textAlign: "center",
+    fontFamily: "Impact",
   },
   label: {
     fontSize: 16,

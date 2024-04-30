@@ -115,7 +115,7 @@ const TelaHome = () => {
       {/* Conteúdo do pedido */}
       <View style={styles.containerSecundario}>
         <View style={styles.tituloContainer}>
-          <Text style={[styles.textPedido, { fontSize: 40 }]}>
+          <Text style={[styles.textPedido, { fontSize: 60 }]}>
             Atribuição de Pedidos
           </Text>
           <Image
@@ -247,7 +247,8 @@ const styles = StyleSheet.create({
   textPedido: {
     fontWeight: "bold",
     color: "#B20000",
-    textAlign: "center", // Centralizando o texto
+    textAlign: "center", 
+    fontFamily: "Impact",
   },
   label: {
     fontSize: 16,

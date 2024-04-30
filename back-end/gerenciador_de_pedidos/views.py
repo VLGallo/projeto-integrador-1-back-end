@@ -1,5 +1,6 @@
 from gerenciador_de_clientes.models import Cliente
 from gerenciador_de_clientes.serializers import ClienteSerializer
+from gerenciador_de_motoboys.serializers import MotoboySerializerResponse
 from gerenciador_de_funcionarios.models import Funcionario
 from gerenciador_de_funcionarios.serializers import FuncionarioSerializer
 from gerenciador_de_motoboys.models import Motoboy
@@ -179,18 +180,50 @@ class PedidoActionView(APIView):
         return Response(response_data, status=status.HTTP_200_OK)
 
 
+# class PedidosAtribuidosMotoboyView(APIView):
+#     def get(self, request):
+#         # Obtém a data atual
+#         data_atual = date.today()
+#
+#         # Obtém todos os motoboys
+#         motoboys = Motoboy.objects.all()
+#
+#         # Inicializa um dicionário para armazenar os pedidos de cada motoboy
+#         motoboys_pedidos = {}
+#
+#         # Itera sobre todos os motoboys
+#         for motoboy in motoboys:
+#             # Filtra os pedidos atribuídos ao motoboy na data atual
+#             pedidos = Pedido.objects.filter(motoboy=motoboy, data_hora_inicio__date=data_atual)
+#
+#             # Verifica se há pedidos atribuídos ao motoboy
+#             if pedidos.exists():
+#                 # Serializa os pedidos encontrados
+#                 serializer = PedidoSerializerResponse(pedidos, many=True)
+#
+#                 # Adiciona os pedidos serializados ao dicionário, usando o ID do motoboy como chave
+#                 motoboys_pedidos[motoboy.id] = serializer.data
+#
+#         return Response(motoboys_pedidos, status=status.HTTP_200_OK)
+
 class PedidosAtribuidosMotoboyView(APIView):
-    def get(self, request, motoboy_id):
-        try:
-            motoboy = Motoboy.objects.get(pk=motoboy_id)
-        except Motoboy.DoesNotExist:
-            return Response("Motoboy não encontrado", status=status.HTTP_404_NOT_FOUND)
-
-        # Obtém a data atual
+    def get(self, request):
         data_atual = date.today()
+        motoboys = Motoboy.objects.all()
+        motoboys_pedidos = {}
 
-        # Filtra os pedidos atribuídos ao motoboy na data atual
-        pedidos = Pedido.objects.filter(motoboy=motoboy, data_hora_inicio__date=data_atual)
+        for motoboy in motoboys:
+            pedidos = Pedido.objects.filter(
+                motoboy=motoboy,
+                data_hora_inicio__date=data_atual,
+                data_hora_finalizacao__isnull=False  # Filtra apenas pedidos com data_hora_finalizacao não nula
+            )
+            if pedidos.exists():
+                serializer = PedidoSerializerResponse(pedidos, many=True)
+                motoboy_serializer = MotoboySerializerResponse(motoboy)  # Serializa o motoboy completo
+                motoboys_pedidos[motoboy.id] = {
+                    'motoboy': motoboy_serializer.data,
+                    'pedidos': serializer.data
+                }
 
-        serializer = PedidoSerializerResponse(pedidos, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(motoboys_pedidos, status=status.HTTP_200_OK)

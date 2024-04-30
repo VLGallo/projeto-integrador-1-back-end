@@ -128,8 +128,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
-    fontSize: 20,
+    fontSize: 40,
+    fontFamily: "Impact",
     marginBottom: 10,
+    color: "#B20000",
   },
   input: {
     width: "80%",
@@ -151,8 +153,8 @@ const styles = StyleSheet.create({
     color: "white"
   },
   SistemaSubTitulo:{
-    fontFamily: "Arial", 
-    fontWeight: "bold",
+    fontFamily: "Impact", 
+
     fontSize: 40,
     color: "white"
   },

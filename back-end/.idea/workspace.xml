@@ -5,6 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8a46607-84d6-4ba1-86b6-a82d3513640c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gerenciador_de_pedidos/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_pedidos/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gerenciador_de_pedidos/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador_de_pedidos/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/src/components/CustomModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/components/CustomModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/src/telas/TelaAtribuicao.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/telas/TelaAtribuicao.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/src/telas/TelaHome.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/telas/TelaHome.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/src/telas/TelaLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/telas/TelaLogin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/src/telas/TelaPedido.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/telas/TelaPedido.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front-end/src/telas/TelaRelatorio.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/telas/TelaRelatorio.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -107,7 +116,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/gerenciador_de_pedidos/views.py</url>
-          <line>158</line>
+          <line>159</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

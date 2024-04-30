@@ -72,8 +72,8 @@ const TelaHome = () => {
       if (response.status >= 200 && response.status < 400) {
         setModalVisible(true);
         setItens([]);
-        setClienteSelecionado('');
-        setSelectedProduct('');
+        setClienteSelecionado("");
+        setSelectedProduct("");
       }
     } catch (error) {
       setModalVisible(true);
@@ -111,7 +111,7 @@ const TelaHome = () => {
     // Verifique se selectedProduct está definido antes de adicionar à lista de itens
     if (selectedProduct) {
       setItens((prevItens) => [...prevItens, selectedProduct]);
-      setSelectedProduct("")
+      setSelectedProduct("");
     }
   };
   const removerItem = (index) => {
@@ -129,7 +129,7 @@ const TelaHome = () => {
       />
       <View>
         <View style={styles.tituloContainer}>
-          <Text style={[styles.textPedido, { fontSize: 40 }]}>Pedidos</Text>
+          <Text style={[styles.textPedido, { fontSize: 60 }]}>Pedidos</Text>
           <Image
             source={require("../../assets/images/pizza.png")}
             style={[styles.image, styles.posicaoImage]}
@@ -245,6 +245,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#B20000",
     textAlign: "center",
+    fontFamily: "Impact",
   },
   label: {
     fontSize: 16,

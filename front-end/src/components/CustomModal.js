@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   openButton: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "#B20000",
     borderRadius: 20,
     padding: 10,
     elevation: 2,
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     marginTop: 22,
   },
   modalButton: {
-    backgroundColor: "#ff0000",
+    backgroundColor: "#B20000",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
