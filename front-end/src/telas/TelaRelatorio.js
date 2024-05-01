@@ -16,6 +16,7 @@ import {
   Grid,
   Typography,
   IconButton,
+  emphasize,
 } from "@mui/material";
 import {
   Table,
@@ -59,64 +60,70 @@ const TelaHome = () => {
         <Text style={[styles.textPedido, { fontSize: 60 }]}>
           Relatório de Entregas
         </Text>
-        <Image
-          source={require("../../assets/images/pizza.png")}
-          style={[styles.image, styles.posicaoImage]}
-          resizeMode="contain"
-        />
       </View>
-  
-      {!carregandoPedidosDoDia && (
-        <View style={styles.container}>
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Motoboy</TableCell>
-                  <TableCell>Pedido</TableCell>
-                  <TableCell>Finalização</TableCell>
-                  <TableCell>Qtd de Pedidos Entregues</TableCell> {/* Nova coluna */}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {Object.keys(pedidosDoDia).map((motoboyId) => (
-                  <TableRow key={motoboyId}>
-                    <TableCell>
-                      {pedidosDoDia[motoboyId].motoboy.nome}
+
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        {!carregandoPedidosDoDia && (
+          <View style={styles.container}>
+            <TableContainer component={Paper}>
+              <Table style={styles.tabela}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell style={{ textAlign: "center", fontSize: 20 }}>
+                      Motoboy
                     </TableCell>
-                    <TableCell>
-                      <ul>
-                        {pedidosDoDia[motoboyId].pedidos.map((pedido) => (
-                          <li key={pedido.id}>{pedido.id}</li>
-                        ))}
-                      </ul>
-                    </TableCell>
-                    <TableCell>
-                      <ul>
-                        {pedidosDoDia[motoboyId].pedidos.map((pedido) => (
-                          <li key={pedido.id}>
-                            {pedido.data_hora_finalizacao
-                              ? new Date(
-                                  pedido.data_hora_finalizacao
-                                ).toLocaleString()
-                              : "-"}
-                          </li>
-                        ))}
-                      </ul>
-                    </TableCell>
-                    <TableCell> {/* Nova célula */}
-                      {pedidosDoDia[motoboyId].pedidos.length} {/* Calcula a quantidade de pedidos */}
-                    </TableCell>
+                    <TableCell style={{ fontSize: 20 }}>Pedido</TableCell>
+                    <TableCell style={{ fontSize: 20 }}>Finalização</TableCell>
+                    <TableCell style={{ fontSize: 20 }}>Entregas</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                </TableHead>
+                <TableBody>
+                  {Object.keys(pedidosDoDia).map((motoboyId) => (
+                    <TableRow key={motoboyId}>
+                      <TableCell style={{ fontSize: 20 }}>
+                        {pedidosDoDia[motoboyId].motoboy.nome}
+                      </TableCell>
+                      <TableCell style={{ fontSize: 20 }}>
+                        <ul>
+                          {pedidosDoDia[motoboyId].pedidos.map((pedido) => (
+                            <li key={pedido.id}>{pedido.id}</li>
+                          ))}
+                        </ul>
+                      </TableCell>
+                      <TableCell style={{ fontSize: 20 }}>
+                        <div>
+                          {pedidosDoDia[motoboyId].pedidos.map((pedido) => (
+                            <li key={pedido.id}>
+                              {pedido.data_hora_finalizacao
+                                ? new Date(
+                                    pedido.data_hora_finalizacao
+                                  ).toLocaleTimeString()
+                                : "-"}
+                            </li>
+                          ))}
+                        </div>
+                      </TableCell>
+                      <TableCell style={{ fontSize: 20 }}>
+                        {pedidosDoDia[motoboyId].pedidos.length}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </View>
+        )}
+
+        <View style={{ flex: 1 }}>
+          <Image
+            source={require("../../assets/images/logo.png")}
+            style={[styles.image, { width: 440, height: 440 }]}
+            resizeMode="contain"
+          />
         </View>
-      )}
+      </View>
     </Template>
   );
-  
 };
 
 const styles = StyleSheet.create({
@@ -183,6 +190,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 20,
+  },
+  Tabela: {
+    fontSize: 16,
   },
 });
 

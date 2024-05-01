@@ -35,8 +35,9 @@ const TelaHome = () => {
   const [carregandoMotoboys, setCarregandoMotoboys] = useState(true);
   const [carregandoPedidos, setCarregandoPedidos] = useState(true);
 
-
-  useEffect(() => {console.log(selectedMotoboy)})
+  useEffect(() => {
+    console.log(selectedMotoboy);
+  });
 
   useEffect(() => {
     const carregarMotoboy = async () => {
@@ -78,14 +79,14 @@ const TelaHome = () => {
         setModalVisible(true);
         console.log(error);
       }
-      
+
       setModalVisible(true);
     }
   };
 
   const handleCancelar = () => {
     setSelectedPedidos([]);
-    setSelectedMotoboy('');
+    setSelectedMotoboy("");
   };
 
   const buscarPedido = (pedidoId) => {
@@ -118,11 +119,6 @@ const TelaHome = () => {
           <Text style={[styles.textPedido, { fontSize: 60 }]}>
             Atribuição de Pedidos
           </Text>
-          <Image
-            source={require("../../assets/images/atribuicaoIcone.png")}
-            style={[styles.image, styles.posicaoImage]}
-            resizeMode="contain"
-          />
         </View>
 
         <View style={{ flexDirection: "row" }}>
@@ -214,7 +210,7 @@ const TelaHome = () => {
           <View style={{ flex: 1 }}>
             <Image
               source={require("../../assets/images/logo.png")}
-              style={[styles.image, { width: 220, height: 280 }]}
+              style={[styles.image, { width: 440, height: 440 }]}
               resizeMode="contain"
             />
           </View>
@@ -225,21 +221,6 @@ const TelaHome = () => {
 };
 
 const styles = StyleSheet.create({
-  containerPrincipal: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "stretch",
-    justifyContent: "flex-start",
-    padding: 16,
-    backgroundColor: "#fff",
-    overflowY: "auto", // Habilita a rolagem vertical
-    height: "100vh", // Define a altura do container para ocupar toda a altura da tela
-  },
-  containerSecundario: {
-    flex: 1,
-    marginTop: 50,
-    flexDirection: "column",
-  },
   image: {
     width: 80,
     height: 100,
@@ -247,7 +228,7 @@ const styles = StyleSheet.create({
   textPedido: {
     fontWeight: "bold",
     color: "#B20000",
-    textAlign: "center", 
+    textAlign: "center",
     fontFamily: "Impact",
   },
   label: {

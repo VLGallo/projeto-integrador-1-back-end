@@ -130,11 +130,7 @@ const TelaHome = () => {
       <View>
         <View style={styles.tituloContainer}>
           <Text style={[styles.textPedido, { fontSize: 60 }]}>Pedidos</Text>
-          <Image
-            source={require("../../assets/images/pizza.png")}
-            style={[styles.image, styles.posicaoImage]}
-            resizeMode="contain"
-          />
+         
         </View>
 
         <View style={{ flexDirection: "row" }}>
@@ -148,6 +144,7 @@ const TelaHome = () => {
                   setClienteSelecionado(itemValue)
                 }
               >
+                <option value="">Selecione um Cliente</option>
                 {!carregandoClientes &&
                   clientes.map((cliente) => (
                     <Picker.Item
@@ -177,7 +174,7 @@ const TelaHome = () => {
                       />
                     </Grid>
                     <Grid item xs={2}>
-                      <IconButton onClick={() => removerItem(index)}>
+                      <IconButton  onClick={() => removerItem(index)}>
                         <DeleteIcon />
                       </IconButton>
                     </Grid>
@@ -226,7 +223,7 @@ const TelaHome = () => {
           <View style={{ flex: 1, flexDirection: "column" }}>
             <Image
               source={require("../../assets/images/logo.png")}
-              style={[styles.image, { width: 220, height: 280 }]}
+              style={[styles.image, { width: 440, height: 440 }]}
               resizeMode="contain"
             />
           </View>

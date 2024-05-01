@@ -16,6 +16,7 @@ const TelaHome = () => {
         <Text style={[styles.textPedido, { fontSize: 60 }]}>
           Gestão de Entregas
         </Text>
+        <View style={{height:'80vh'}}></View>
       </View>
     </Template>
   );
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
     fontFamily: "Impact",
   },
   tituloContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center", 
     marginBottom: 20,

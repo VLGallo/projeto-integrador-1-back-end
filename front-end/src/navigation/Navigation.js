@@ -7,6 +7,7 @@ import TelaPedido from "../telas/TelaPedido";
 import TelaAtribuicao from "../telas/TelaAtribuicao";
 import TelaCadastro from "../telas/TelaCadastro";
 import TelaRelatorio from "../telas/TelaRelatorio";
+import TelaMotoboy from "../telas/TelaMotoboy";
 
 const Stack = createStackNavigator();
 
@@ -48,6 +49,12 @@ const Navigation = () => {
           <Stack.Screen
             name="TelaRelatorio"
             component={TelaRelatorio}
+            options={{ headerShown: false }}
+          />
+
+          <Stack.Screen
+            name="TelaMotoboy"
+            component={TelaMotoboy}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

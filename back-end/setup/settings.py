@@ -49,6 +49,14 @@ REST_FRAMEWORK = {
     ],
 }
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8082',
+    'http://192.168.0.10',
+]
+
+ALLOWED_HOSTS = ['localhost','192.168.0.10']
+
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -126,9 +134,6 @@ USE_TZ = True
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8082',
-]
 
 
 # Static files (CSS, JavaScript, Images)

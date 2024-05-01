@@ -24,6 +24,11 @@ const SideNavigation = ({}) => {
     navigation.navigate("TelaRelatorio");
   };
 
+  const entrarTelaMotoboy = () => {
+    navigation.navigate("TelaMotoboy");
+  };
+
+
 
   const destroyCookie = () => {
     try {
@@ -56,6 +61,7 @@ const SideNavigation = ({}) => {
       <Pressable onPress={entrarTelaCadastro} style={styles.button}>
         <Text style={styles.buttonText}>Cadastro</Text>
       </Pressable>
+  
       <Pressable
         onPress={handleSair}
         style={[styles.button, { backgroundColor: "#B20000" }]}

@@ -12,7 +12,6 @@ import CustomModal from "../components/CustomModal";
 import axios from "axios";
 
 const TelaCadastro = () => {
-
   const [modalVisible, setModalVisible] = useState("");
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
@@ -55,7 +54,7 @@ const TelaCadastro = () => {
       />
 
       <View style={styles.tituloContainer}>
-        <Text style={[styles.textPedido, { fontSize: 60 }]}>
+        <Text style={[styles.textPedido, { fontSize: 60, fontWeight: "bold" }]}>
           Cadastro de Entregadores
         </Text>
       </View>
@@ -105,7 +104,7 @@ const TelaCadastro = () => {
         <View style={{ flex: 1 }}>
           <Image
             source={require("../../assets/images/logo.png")}
-            style={[styles.image, { width: 220, height: 280 }]}
+            style={[styles.image, { width: 440, height: 440 }]}
             resizeMode="contain"
           />
         </View>
@@ -114,9 +113,8 @@ const TelaCadastro = () => {
   );
 };
 
-
 const styles = StyleSheet.create({
-   label: {
+  label: {
     fontSize: 16,
     fontWeight: "bold",
     marginBottom: 8,
@@ -147,14 +145,13 @@ const styles = StyleSheet.create({
   tituloContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center", 
+    justifyContent: "center",
     marginBottom: 20,
   },
-  textPedido:{
+  textPedido: {
     fontFamily: "Impact",
-    color: 'rgb(178, 0, 0)'
-  }
+    color: "rgb(178, 0, 0)",
+  },
 });
-
 
 export default TelaCadastro;

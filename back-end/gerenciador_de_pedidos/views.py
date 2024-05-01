@@ -36,13 +36,6 @@ class PedidoListView(APIView):
         for pedido in pedidos:
             pedido_data = PedidoSerializerResponse(pedido).data
 
-            cliente_id = pedido_data['cliente']
-            try:
-                cliente = Cliente.objects.get(pk=cliente_id)
-                pedido_data['cliente'] = ClienteSerializer(cliente).data
-            except Cliente.DoesNotExist:
-                pedido_data['cliente'] = None
-
             funcionario_id = pedido.funcionario_id
             if funcionario_id:
                 try:
@@ -180,33 +173,33 @@ class PedidoActionView(APIView):
         return Response(response_data, status=status.HTTP_200_OK)
 
 
-# class PedidosAtribuidosMotoboyView(APIView):
-#     def get(self, request):
-#         # Obtém a data atual
-#         data_atual = date.today()
-#
-#         # Obtém todos os motoboys
-#         motoboys = Motoboy.objects.all()
-#
-#         # Inicializa um dicionário para armazenar os pedidos de cada motoboy
-#         motoboys_pedidos = {}
-#
-#         # Itera sobre todos os motoboys
-#         for motoboy in motoboys:
-#             # Filtra os pedidos atribuídos ao motoboy na data atual
-#             pedidos = Pedido.objects.filter(motoboy=motoboy, data_hora_inicio__date=data_atual)
-#
-#             # Verifica se há pedidos atribuídos ao motoboy
-#             if pedidos.exists():
-#                 # Serializa os pedidos encontrados
-#                 serializer = PedidoSerializerResponse(pedidos, many=True)
-#
-#                 # Adiciona os pedidos serializados ao dicionário, usando o ID do motoboy como chave
-#                 motoboys_pedidos[motoboy.id] = serializer.data
-#
-#         return Response(motoboys_pedidos, status=status.HTTP_200_OK)
-
 class PedidosAtribuidosMotoboyView(APIView):
+    def get(self, request, motoboy_id):
+        data_atual = date.today()
+        try:
+            motoboy = Motoboy.objects.get(id=motoboy_id)
+        except Motoboy.DoesNotExist:
+            return Response({'message': 'Motoboy não encontrado'}, status=status.HTTP_404_NOT_FOUND)
+
+        pedidos = Pedido.objects.filter(
+            motoboy=motoboy,
+            data_hora_inicio__date=data_atual
+        ) # Calcula o total dos pedidos
+
+        serializer = PedidoSerializerResponse(pedidos, many=True)
+        pedidosSerializados = serializer.data
+
+
+        motoboy_serializer = MotoboySerializerResponse(motoboy)  # Serializa o motoboy completo
+
+        # Retornar os dados dos pedidos e do motoboy com todos os campos, incluindo o total dos pedidos
+        return Response({
+            'motoboy': motoboy_serializer.data,
+            'pedidos': pedidosSerializados
+        }, status=status.HTTP_200_OK)
+
+
+class PedidosAtribuidosMotoboysView(APIView):
     def get(self, request):
         data_atual = date.today()
         motoboys = Motoboy.objects.all()

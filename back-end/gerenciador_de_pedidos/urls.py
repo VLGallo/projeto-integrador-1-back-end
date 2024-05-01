@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import PedidoView, PedidoListView, PedidoDetailView, PedidoUpdateView, PedidoDeleteView, \
-    PedidoAssignMotoboyView, PedidoActionView, PedidosAtribuidosMotoboyView
+    PedidoAssignMotoboyView, PedidoActionView, PedidosAtribuidosMotoboysView, PedidosAtribuidosMotoboyView
 
 urlpatterns = [
     path('pedido', PedidoListView.as_view()),
@@ -10,5 +10,6 @@ urlpatterns = [
     path('pedido/delete/<int:pk>', PedidoDeleteView.as_view()),
     path('pedido/<int:pk>/atribuir-motoboy/<int:motoboy_id>', PedidoAssignMotoboyView.as_view()),
     path('pedido/<int:pk>/action/<str:action>', PedidoActionView.as_view()),
-    path('pedido/motoboy/', PedidosAtribuidosMotoboyView.as_view())
+    path('pedido/motoboy/', PedidosAtribuidosMotoboysView.as_view()),
+    path('pedido/motoboy/<int:motoboy_id>', PedidosAtribuidosMotoboyView.as_view())
 ]
