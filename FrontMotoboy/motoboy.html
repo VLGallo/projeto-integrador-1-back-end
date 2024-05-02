@@ -3,52 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pedidos Casa Zé Rissi</title>
+    <title>Entregas</title>
     <link rel="stylesheet" href="style.css" />
     <script src="functions.js"></script>
   </head>
-  <body style="padding: 20px">
-    <h1
-      style="
-        color: #fff;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        font-weight: 100;
-        font-size: 3.5em;
-      "
-    >
-      Entregas
-    </h1>
+
+
+  <body>
+    <h1>Entregas</h1>
     <div class="container">
       <div
         style="
           display: flex;
           flex-direction: row;
           justify-content: space-around;
-        "
-      >
+        ">
         <div>
-          <div class="pedido-info" style="border: none; padding:10px; font-size: 1.1em;">
-            <p><strong>Motoboy:</strong> <span id="motoboy"></span></p>
+          <div class="pedido-info">
+            <p><span id="motoboy"></span></p>
           </div>
         </div>
         <div class="imagemPizza">
-          <img src="image/pizza2.png" alt="Pizza" width="70" height="auto" />
+          <img src="image/pizza.png" alt="Pizza" width="100" height="auto" />
         </div>
       </div>
     </div>
 
     <div id="lista-pedidos" class="container-lista-pedidos"></div>
-
     <div
       style="
         display: flex;
         flex-direction: row;
         justify-content: center;
         gap: 10px;
-      "
-    >
-      <div class="imagemPizza">
-        <img src="image/logo.png" alt="Pizza" width="150" height="auto" />
+      ">
+      <div class="imagemLogo">
+        <img src="image/logo.png" alt="Logotipo" width="200" height="auto" />
       </div>
 
       <div>
@@ -59,7 +49,7 @@
         <br />
         <div class="entregas-feitas-container">
           <div class="entregas-feitas" style="font-size: 0.8em;">Valor a receber</div>
-          <div id="valor-a-receber">R$ 00,00</div>
+          <div id="valor-a-receber">R$00,00</div>
         </div>
       </div>
     </div>

@@ -39,7 +39,6 @@ const TelaCadastro = () => {
   };
 
   const handleCancelar = () => {
-    // Limpar os campos
     setNome("");
     setTelefone("");
     setPlaca("");
@@ -50,7 +49,7 @@ const TelaCadastro = () => {
       <CustomModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        modalText="Cadastrado com sucesso"
+        modalText="Entregador(a) cadastrado(a) com sucesso"
       />
 
       <View style={styles.tituloContainer}>

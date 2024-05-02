@@ -111,7 +111,7 @@ const TelaHome = () => {
       <CustomModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        modalText="Pedidos atribuidos com sucesso"
+        modalText="Pedido(s) atribuído(s) com sucesso"
       />
       {/* Conteúdo do pedido */}
       <View style={styles.containerSecundario}>

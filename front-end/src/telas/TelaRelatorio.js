@@ -28,7 +28,7 @@ import {
   Paper,
 } from "@mui/material";
 
-const TelaHome = () => {
+const TelaRelatorio = () => {
   const [motoboys, setMotoboys] = useState([]);
   const [pedidosDoDia, setPedidosDoDia] = useState([]);
   const [carregandoMotoboys, setCarregandoMotoboys] = useState(false);
@@ -69,46 +69,51 @@ const TelaHome = () => {
               <Table style={styles.tabela}>
                 <TableHead>
                   <TableRow>
-                    <TableCell style={{ textAlign: "center", fontSize: 20 }}>
-                      Motoboy
-                    </TableCell>
+                    <TableCell style={{ fontSize: 20 }}>Motoboy</TableCell>
                     <TableCell style={{ fontSize: 20 }}>Pedido</TableCell>
                     <TableCell style={{ fontSize: 20 }}>Finalização</TableCell>
                     <TableCell style={{ fontSize: 20 }}>Entregas</TableCell>
                   </TableRow>
                 </TableHead>
+         
                 <TableBody>
-                  {Object.keys(pedidosDoDia).map((motoboyId) => (
-                    <TableRow key={motoboyId}>
-                      <TableCell style={{ fontSize: 20 }}>
-                        {pedidosDoDia[motoboyId].motoboy.nome}
-                      </TableCell>
-                      <TableCell style={{ fontSize: 20 }}>
-                        <ul>
-                          {pedidosDoDia[motoboyId].pedidos.map((pedido) => (
-                            <li key={pedido.id}>{pedido.id}</li>
-                          ))}
-                        </ul>
-                      </TableCell>
-                      <TableCell style={{ fontSize: 20 }}>
-                        <div>
-                          {pedidosDoDia[motoboyId].pedidos.map((pedido) => (
-                            <li key={pedido.id}>
-                              {pedido.data_hora_finalizacao
-                                ? new Date(
-                                    pedido.data_hora_finalizacao
-                                  ).toLocaleTimeString()
-                                : "-"}
-                            </li>
-                          ))}
-                        </div>
-                      </TableCell>
-                      <TableCell style={{ fontSize: 20 }}>
-                        {pedidosDoDia[motoboyId].pedidos.length}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
+                    {Object.keys(pedidosDoDia).map((motoboyId) => (
+                      <TableRow key={motoboyId}>
+                        <TableCell style={{ fontSize: 20 }}>
+                          {pedidosDoDia[motoboyId].motoboy.nome}
+                        </TableCell>
+                        <TableCell style={{ fontSize: 20 }}>
+                          <ul style={{ listStyleType: 'none', padding: 0 }}>
+                            {pedidosDoDia[motoboyId].pedidos
+                              .filter((pedido) => pedido.status === "Entregue") 
+                              .map((pedido) => (
+                                <li key={pedido.id}>{pedido.id}</li>
+                              ))}
+                          </ul>
+                        </TableCell>
+                        <TableCell style={{ fontSize: 20 }}>
+                          <div>
+                            {pedidosDoDia[motoboyId].pedidos
+                              .filter((pedido) => pedido.status === "Entregue") 
+                              .map((pedido) => (
+                                <li key={pedido.id}>
+                                  {pedido.data_hora_finalizacao
+                                    ? new Date(
+                                        pedido.data_hora_finalizacao
+                                      ).toLocaleTimeString()
+                                    : "-"}
+                                </li>
+                              ))}
+                          </div>
+                        </TableCell>
+                        <TableCell style={{ fontSize: 20 }}>
+                          {pedidosDoDia[motoboyId].pedidos.filter(
+                            (pedido) => pedido.status === "Entregue"
+                          ).length}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
               </Table>
             </TableContainer>
           </View>
@@ -196,4 +201,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TelaHome;
+export default TelaRelatorio;

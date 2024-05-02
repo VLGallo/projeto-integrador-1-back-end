@@ -17,7 +17,6 @@ function exibirPedidos(pedidos) {
   const listaPedidos = document.getElementById("lista-pedidos");
   listaPedidos.innerHTML = "";
 
-  // Inicializa o contador de pedidos entregues
   let pedidosEntregues = 0;
 
   pedidos.forEach((pedido) => {
@@ -33,7 +32,7 @@ function exibirPedidos(pedidos) {
                   .join("")}
               </ul>
             </div>
-            <p><strong>Total:</strong> R$ ${pedido.total_pedido.toFixed(2)}</p>
+            <p><strong>Total:</strong> R$${pedido.total_pedido.toFixed(2)}</p>
             <p><strong>Status:</strong> ${pedido.status}</p>
           `;
 
@@ -66,14 +65,12 @@ function exibirPedidos(pedidos) {
       entregarCheckbox.addEventListener("click", () => {
         if (entregarCheckbox.checked) {
           confirmarOuCancelarEntrega(pedido.id, "entregar", listaPedidos);
-          // Recarrega a página ao clicar no checkbox
         }
       });
 
       cancelarCheckbox.addEventListener("click", () => {
         if (cancelarCheckbox.checked) {
           confirmarOuCancelarEntrega(pedido.id, "cancelar", listaPedidos);
-          // Recarrega a página ao clicar no checkbox
         }
       });
     }
@@ -90,7 +87,6 @@ function exibirPedidos(pedidos) {
 
     listaPedidos.appendChild(pedidoDiv);
 
-    // Incrementa o contador se o pedido estiver "Entregue"
     if (pedido.status === "Entregue") {
       pedidosEntregues++;
     }
@@ -140,7 +136,7 @@ function confirmarOuCancelarEntrega(idPedido, acao, listaPedidos) {
     .then((data) => {
       console.log("Requisição bem-sucedida:", data);
       console.log("Recarregando a página...");
-      window.location.reload(); // Reload da página
+      window.location.reload();
     })
     .catch((error) => {
       console.error("Erro:", error);
@@ -149,7 +145,6 @@ function confirmarOuCancelarEntrega(idPedido, acao, listaPedidos) {
 }
 
 window.onload = function () {
-  // Obtendo o parâmetro "motoboy" da URL
   const urlParams = new URLSearchParams(window.location.search);
   const motoboyId = urlParams.get("motoboy");
 

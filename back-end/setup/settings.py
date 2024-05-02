@@ -52,9 +52,10 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8082',
     'http://192.168.0.10',
+    'http://127.0.0.1',
 ]
 
-ALLOWED_HOSTS = ['localhost','192.168.0.10']
+ALLOWED_HOSTS = ['localhost','192.168.0.10', '127.0.0.1']
 
 
 

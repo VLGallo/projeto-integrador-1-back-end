@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import TelaLogin from "../telas/TelaLogin"; // Importe o componente de tela de login
+import TelaLogin from "../telas/TelaLogin"; 
 import TelaHome from "../telas/TelaHome";
 import TelaPedido from "../telas/TelaPedido";
 import TelaAtribuicao from "../telas/TelaAtribuicao";
