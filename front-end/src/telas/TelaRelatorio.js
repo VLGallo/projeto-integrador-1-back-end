@@ -39,7 +39,7 @@ const TelaRelatorio = () => {
         setCarregandoMotoboys(true);
 
         const response = await axios.get(
-          "https//zerissi.azurewebsites.net/pedido/motoboy/"
+          "https://zerissi.azurewebsites.net/pedido/motoboy/"
         );
 
         setPedidosDoDia(response.data);

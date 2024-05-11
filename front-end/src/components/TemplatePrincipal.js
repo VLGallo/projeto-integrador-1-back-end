@@ -25,7 +25,7 @@ const Template = ({ children, imagem }) => {
       width: 80,
       alignItems: "center",
       justifyContent: "center",
-      backgroundImage: "url(" + imagem + ")",
+      backgroundImage: require(imagem),
       backgroundSize: "cover",
       backgroundPosition: "center",
       backgroundColor: "rgba(255, 255, 255, 0.2)",
