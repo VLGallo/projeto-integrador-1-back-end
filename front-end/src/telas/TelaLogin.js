@@ -76,7 +76,7 @@ const TelaLogin = () => {
         setModalVisible={setModalVisible}
         modalText="Credenciais Inválidas"
       />
-      <View style={{ flex: 2, flexDirection:"column", justifyContent:"center", alignItems:"center" , backgroundImage: require("../../assets/images/bg-opaco.png") , backgroundColor: "#B20000"}}>
+      <View style={{ flex: 2, flexDirection:"column", justifyContent:"center", alignItems:"center" , backgroundImage: "url(./bg-opaco.png)" , backgroundColor: "#B20000"}}>
         <View>
           <Text style={styles.SistemaTitulo}>Gestão de Entregas</Text>
           <Text style={styles.SistemaSubTitulo}>Casa Zé Rissi</Text>
