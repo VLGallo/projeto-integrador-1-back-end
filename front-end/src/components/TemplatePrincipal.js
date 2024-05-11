@@ -1,18 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
   TextInput,
   Pressable,
   StyleSheet,
+  ImageBackground,
   Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import SideNavigation from "../components/SideNavigation";
 
-
-
 const Template = ({ children, imagem }) => {
+
+  useEffect(()=>{
+    console.log("teste" + imagem);
+  })
 
   const styles = StyleSheet.create({
     containerPrincipal: {
@@ -22,13 +25,12 @@ const Template = ({ children, imagem }) => {
     },
     leftContainer: {
       flex: 2,
-      width: 80,
+      width: "100%",
       alignItems: "center",
       justifyContent: "center",
-      backgroundImage: "url(" + image + ")",
       backgroundSize: "cover",
       backgroundPosition: "center",
-      backgroundColor: "rgba(255, 255, 255, 0.2)",
+      backgroundColor: "rgba(255, 255, 255, 0.0)",
     },
     rightContainer: {
       flex: 1,
@@ -78,7 +80,7 @@ const Template = ({ children, imagem }) => {
     menuSuperior: {
       flexDirection: "row",
       justifyContent: "center", // Centralizando os botões
-      alignItems: "center"
+      alignItems: "center",
     },
     menuButton: {
       backgroundColor: "#015500",
@@ -97,22 +99,31 @@ const Template = ({ children, imagem }) => {
       alignItems: "center",
       justifyContent: "center", // Centralizando os elementos dentro do container do título
       marginBottom: 20,
+    }, 
+    backImage: {
+      flex: 2,
+      justifyContent: "center",
+      width:"100%"
     },
   });
 
   return (
     <View style={styles.containerPrincipal}>
-      <View style={styles.leftContainer}>
-        {children} 
-      </View>
+      <ImageBackground
+        source={require("../../assets/images/bg-opaco.png")}
+        resizeMode="cover"
+        style={styles.backImage}
+      >
+        <View style={styles.leftContainer}>{children}</View>
+      </ImageBackground>
 
       <View style={styles.rightContainer}>
         <SideNavigation />
       </View>
     </View>
   );
-  
 };
+
 
 
 export default Template;

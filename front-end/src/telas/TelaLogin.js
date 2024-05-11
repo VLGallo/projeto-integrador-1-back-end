@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   Image,
+  ImageBackground,
   Pressable,
 } from "react-native";
 import axios from "axios";
@@ -38,7 +39,6 @@ const TelaLogin = () => {
     verificaLogado();
   }, []); // O segundo argumento vazio [] significa que este efeito só será executado após a primeira renderização
 
-
   const setCookie = async (usuario) => {
     try {
       await AsyncStorage.setItem("usuario", usuario);
@@ -50,10 +50,13 @@ const TelaLogin = () => {
 
   const entrarTelaHome = async () => {
     try {
-      const response = await axios.post("https://zerissi.azurewebsites.net/login", {
-        usuario: usuario,
-        senha: senha,
-      });
+      const response = await axios.post(
+        "https://zerissi.azurewebsites.net/login",
+        {
+          usuario: usuario,
+          senha: senha,
+        }
+      );
 
       console.log(response);
 
@@ -76,13 +79,27 @@ const TelaLogin = () => {
         setModalVisible={setModalVisible}
         modalText="Credenciais Inválidas"
       />
-      <View style={{ flex: 2, flexDirection:"column", justifyContent:"center", alignItems:"center" , backgroundImage: "url(./bg-opaco.png)" , backgroundColor: "#B20000"}}>
-        <View>
-          <Text style={styles.SistemaTitulo}>Gestão de Entregas</Text>
-          <Text style={styles.SistemaSubTitulo}>Casa Zé Rissi</Text>
+      <ImageBackground
+        source={require("../../assets/images/bg-opaco.png")}
+        resizeMode="cover"
+        style={styles.backImage}
+      >
+        <View
+          style={{
+            flex: 2,
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(178,0,0,0.7)",
+          }}
+        >
+          <View>
+            <Text style={styles.SistemaTitulo}>Gestão de Entregas</Text>
+            <Text style={styles.SistemaSubTitulo}>Casa Zé Rissi</Text>
+          </View>
         </View>
-      </View>
-      <View style={ { flex: 1, backgroundColor: "white" }}>
+      </ImageBackground>
+      <View style={{ flex: 1, backgroundColor: "white" }}>
         <View style={styles.rightHalfContent}>
           <Text style={styles.text}> Login </Text>
           <TextInput
@@ -133,6 +150,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: "#B20000",
   },
+  backImage: {
+    flex: 2,
+    justifyContent: "center",
+  },
   input: {
     width: "80%",
     height: 40,
@@ -148,16 +169,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 5,
   },
-  SistemaTitulo:{
-    fontFamily: "Impact", 
+  SistemaTitulo: {
+    fontFamily: "Impact",
     fontSize: 80,
-    color: "white"
+    color: "white",
   },
-  SistemaSubTitulo:{
-    fontFamily: "Impact", 
+  SistemaSubTitulo: {
+    fontFamily: "Impact",
 
     fontSize: 40,
-    color: "white"
+    color: "white",
   },
   buttonText: {
     color: "white",
