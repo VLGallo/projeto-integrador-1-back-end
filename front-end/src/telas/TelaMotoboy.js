@@ -43,7 +43,7 @@ const TelaMotoboy = () => {
   const [pedido, setPedido] = useState(null);
 
   useEffect(() => {
-    fetch("http://zerissi.azurewebapps.net/pedido/motoboy/12")
+    fetch("http://zerissi.azurewebsites.net/pedido/motoboy/12")
       .then((response) => response.json())
       .then((data) => setPedido(data))
       .catch((error) => console.error("Erro ao buscar pedido:", error));

@@ -50,7 +50,7 @@ const TelaLogin = () => {
 
   const entrarTelaHome = async () => {
     try {
-      const response = await axios.post("http://zerissi.azurewebapps.net/login", {
+      const response = await axios.post("http://zerissi.azurewebsites.net/login", {
         usuario: usuario,
         senha: senha,
       });

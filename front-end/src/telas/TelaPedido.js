@@ -42,7 +42,7 @@ const TelaHome = () => {
   useEffect(() => {
     const carregarCliente = async () => {
       try {
-        const response = await axios.get("http://zerissi.azurewebapps.net/cliente");
+        const response = await axios.get("http://zerissi.azurewebsites.net/cliente");
         setClientes(response.data);
         setCarregandoClientes(false);
       } catch (error) {
@@ -63,7 +63,7 @@ const TelaHome = () => {
     console.log(produtosIds);
 
     try {
-      const response = await axios.post("http://zerissi.azurewebapps.net/pedido/add", {
+      const response = await axios.post("http://zerissi.azurewebsites.net/pedido/add", {
         produtos: produtosIds,
         cliente: clienteSelecionado,
         funcionario: 2,
@@ -83,7 +83,7 @@ const TelaHome = () => {
 
   const carregarProdutos = async () => {
     try {
-      const response = await fetch("http://zerissi.azurewebapps.net/produto");
+      const response = await fetch("http://zerissi.azurewebsites.net/produto");
       const data = await response.json();
       setProdutos(data);
     } catch (error) {

@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Gestao de Entregas",
-    "slug": "Gestao de Entregas",
+    "slug": "gestao-de-entregas",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,13 +15,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.vlgallo.gestaodeentregas"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.vlgallo.gestaodeentregas"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,9 +32,16 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/LuckiestGuy.ttf"]
+          "fonts": [
+            "./assets/fonts/LuckiestGuy.ttf"
+          ]
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "065591ce-de62-4925-8fad-13385899e8b9"
+      }
+    }
   }
 }

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/a708a148-abb1-4ec7-a7d3-f0fd46010e25/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/zerissi",
+    "appService.deploySubpath": "."
+}
