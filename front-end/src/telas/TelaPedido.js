@@ -42,7 +42,7 @@ const TelaHome = () => {
   useEffect(() => {
     const carregarCliente = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/cliente");
+        const response = await axios.get("http://zerissi.azurewebapps.net/cliente");
         setClientes(response.data);
         setCarregandoClientes(false);
       } catch (error) {
@@ -63,7 +63,7 @@ const TelaHome = () => {
     console.log(produtosIds);
 
     try {
-      const response = await axios.post("http://localhost:8000/pedido/add", {
+      const response = await axios.post("http://zerissi.azurewebapps.net/pedido/add", {
         produtos: produtosIds,
         cliente: clienteSelecionado,
         funcionario: 2,
@@ -83,7 +83,7 @@ const TelaHome = () => {
 
   const carregarProdutos = async () => {
     try {
-      const response = await fetch("http://localhost:8000/produto");
+      const response = await fetch("http://zerissi.azurewebapps.net/produto");
       const data = await response.json();
       setProdutos(data);
     } catch (error) {
@@ -108,7 +108,6 @@ const TelaHome = () => {
   };
 
   const adicionarItem = () => {
-    // Verifique se selectedProduct está definido antes de adicionar à lista de itens
     if (selectedProduct) {
       setItens((prevItens) => [...prevItens, selectedProduct]);
       setSelectedProduct("");
