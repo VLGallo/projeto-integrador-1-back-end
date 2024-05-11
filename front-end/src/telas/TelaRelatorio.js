@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import Template from "../components/TemplatePrincipal";
 import axios from "axios";
-import { Accordion, List } from "react-native-paper";
 import {
   FormControlLabel,
   Checkbox,
@@ -40,7 +39,7 @@ const TelaRelatorio = () => {
         setCarregandoMotoboys(true);
 
         const response = await axios.get(
-          "http://zerissi.azurewebsites.net/pedido/motoboy/"
+          "https//zerissi.azurewebsites.net/pedido/motoboy/"
         );
 
         setPedidosDoDia(response.data);
