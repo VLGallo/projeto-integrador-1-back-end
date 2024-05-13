@@ -1,16 +1,15 @@
 # 🍕 Pizzaria ZéRissi - Sistema de Gestão de Motoboys 🛵
 
-Bem-vindo ao ZéRissi! Este é um projeto desenvolvido como parte do curso da UNIVESP para atender à demanda de uma pizzaria em Descalvado que precisa de um sistema para gerenciar seus motoboys.
+Bem-vindo a Gestão de Entregas da Casa Zé Rissi! Este é um projeto desenvolvido como parte do curso da UNIVESP para atender à demanda de uma pizzaria em Descalvado que precisa de um sistema para gerenciar seus motoboys.
 
 ## 🚀 Introdução
 
-O Pizzaria Express é um sistema de gestão completo, construído utilizando Django e Python para o backend e React para o frontend. Este projeto visa simplificar o processo de atribuição de entregas aos motoboys, otimizando a eficiência e melhorando o controle sobre as operações de entrega da pizzaria.
+O software foi construído utilizando Django e Python para o backend e React Native para o frontend. Este projeto visa simplificar o processo de atribuição de entregas aos motoboys, otimizando a eficiência e melhorando o controle sobre as operações de entrega da pizzaria.
 
 ## ℹ️ Funcionalidades Principais
 
 - Cadastro e gerenciamento de motoboys.
 - Atribuição de entregas aos motoboys disponíveis.
-- Rastreamento em tempo real das entregas em andamento.
 - Geração de relatórios de desempenho dos motoboys.
 - Integração com o sistema de pedidos da pizzaria.
 
@@ -21,7 +20,8 @@ Antes de iniciar, certifique-se de ter instalado:
 - Python 3.x
 - Django
 - Node.js
-- React
+- React Native
+
 
 ## 🛠️ Instalação e Configuração
 
