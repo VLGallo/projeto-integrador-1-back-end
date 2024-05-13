@@ -1,4 +1,4 @@
-# 🍕 Pizzaria ZéRissi - Sistema de Gestão de Motoboys 🛵
+# 🍕 Pizzaria Casa Zé Rissi - Sistema de Gestão de Entregas 🛵
 
 Bem-vindo a Gestão de Entregas da Casa Zé Rissi! Este é um projeto desenvolvido como parte do curso da UNIVESP para atender à demanda de uma pizzaria em Descalvado que precisa de um sistema para gerenciar seus motoboys.
 
