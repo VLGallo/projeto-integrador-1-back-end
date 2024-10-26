@@ -9,6 +9,14 @@ const SideNavigation = ({}) => {
     navigation.navigate("TelaHome"); // Navega para a tela de pedido
   };
 
+  const entrarTelaCliente = () => {
+    navigation.navigate("TelaCliente"); // Navega para a tela do cliente
+  };
+
+  const entraTelaCliente = () =>{
+    navigation.navigate("TelaCliente");
+  }
+
   const entrarTelaPedido = () => {
     navigation.navigate("TelaPedido"); // Navega para a tela de pedido
   };
@@ -49,6 +57,11 @@ const SideNavigation = ({}) => {
       <Pressable onPress={entrarTelaHome} style={styles.button}>
         <Text style={styles.buttonText}>Home</Text>
       </Pressable>
+
+      <Pressable onPress={entrarTelaCliente} style={styles.button}>
+      <Text style={styles.buttonText}>Cliente</Text>
+      </Pressable>
+
       <Pressable onPress={entrarTelaPedido} style={styles.button}>
         <Text style={styles.buttonText}>Pedido</Text>
       </Pressable>
